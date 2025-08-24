@@ -1,167 +1,52 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Simple GBP & Crypto Converter</title>
-  <meta name="description" content="Fast, privacy-friendly currency and crypto converter: GBP ⇄ USD/EUR and live BTC/ETH/PEPE in GBP.">
-  <meta name="robots" content="index, follow">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E💷%3C/text%3E%3C/svg%3E">
-  <!-- TailwindCSS (CDN) -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Currency & Crypto Converter</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Minimal focus style for accessibility */
-    :focus { outline: 3px solid #a3e635; outline-offset: 2px; }
-  </style>
-  
-  <!-- Structured data for basic SEO -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Simple GBP & Crypto Converter",
-    "url": "https://example.com/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://example.com/?q={query}",
-      "query-input": "required name=query"
-    }
-  }
-  </script>
 </head>
 <body class="bg-slate-50 text-slate-900">
-  <header class="sticky top-0 z-10 bg-white/80 backdrop-blur border-b border-slate-200">
-    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-      <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">Simple GBP & Crypto Converter</h1>
-      <nav class="text-sm hidden sm:flex gap-4">
-        <a href="#converter" class="hover:underline">Currency</a>
-        <a href="#crypto" class="hover:underline">Crypto</a>
-        <a href="#faq" class="hover:underline">FAQ</a>
-      </nav>
-    </div>
-  </header>
+  <div class="max-w-3xl mx-auto p-6">
+    <h1 class="text-3xl font-bold text-center mb-6">💱 Currency & Crypto Converter</h1>
 
-  <!-- Hero / USP -->
-  <section class="max-w-4xl mx-auto p-4 sm:p-6">
-    <div class="rounded-2xl p-6 sm:p-8 bg-gradient-to-br from-sky-50 to-emerald-50 border border-slate-200 shadow">
-      <h2 class="text-2xl sm:text-3xl font-bold mb-2">Fast, privacy‑friendly conversions</h2>
-      <p class="text-slate-700">GBP ⇄ USD/EUR with live rates. Quick crypto glance for <strong>BTC</strong>, <strong>ETH</strong>, and <strong>PEPE</strong>. No sign‑up. No cookies. Just numbers.</p>
-    </div>
-  </section>
-
-  <!-- Monetization: Affiliate / Ad placeholder -->
-  <section aria-label="Support" class="max-w-4xl mx-auto px-4">
-    <div class="rounded-2xl border border-slate-200 bg-white shadow p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <div class="text-sm">
-        <p class="font-semibold">Support this free tool</p>
-        <p class="text-slate-600">If you find it useful, use one of the referral links below or buy me a coffee ☕.</p>
+    <!-- Converter Card -->
+    <div class="bg-white shadow rounded-2xl p-6 mb-8">
+      <h2 class="text-xl font-semibold mb-4">Currency Converter</h2>
+      <div class="grid gap-4 md:grid-cols-3">
+        <input id="amount" type="number" value="1" class="border rounded-lg p-2 w-full" />
+        <select id="from" class="border rounded-lg p-2 w-full"></select>
+        <select id="to" class="border rounded-lg p-2 w-full"></select>
       </div>
-      <div class="flex flex-wrap gap-2">
-        <!-- Replace with your actual referral URLs -->
-        <a href="#" rel="sponsored noopener" class="px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100">Wise referral</a>
-        <a href="#" rel="sponsored noopener" class="px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100">Revolut referral</a>
-        <a href="#" rel="sponsored noopener" class="px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100">Kraken/Coinbase</a>
-        <a href="https://streamelements.com/nib1ru/tip" rel="noopener" class="px-3 py-2 rounded-xl border border-amber-200 bg-amber-50 hover:bg-amber-100">Buy me a coffee</a>
+      <div class="flex gap-3 mt-4">
+        <button id="convertBtn" class="px-4 py-2 rounded-xl bg-indigo-600 text-white shadow">Convert</button>
+        <button id="swapBtn" class="px-4 py-2 rounded-xl bg-slate-200">Swap</button>
+      </div>
+      <div id="result" class="mt-4 text-lg font-medium"></div>
+      <div id="rateInfo" class="text-sm text-slate-600"></div>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <button class="quick-btn px-3 py-1 rounded-lg bg-slate-100" data-quick="GBP|USD">GBP → USD</button>
+        <button class="quick-btn px-3 py-1 rounded-lg bg-slate-100" data-quick="USD|EUR">USD → EUR</button>
+        <button class="quick-btn px-3 py-1 rounded-lg bg-slate-100" data-quick="EUR|GBP">EUR → GBP</button>
       </div>
     </div>
 
-    <!-- Optional AdSense placeholder (needs site approval to work) -->
-    <div class="mt-4 flex justify-center">
-      <div class="w-full sm:w-[728px] h-[90px] rounded-xl border border-dashed border-slate-300 bg-slate-100 grid place-items-center text-slate-500 text-sm">
-        <!-- Replace with real AdSense code once approved -->
-        Ad space (728×90)
+    <!-- Crypto Card -->
+    <div class="bg-white shadow rounded-2xl p-6">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Crypto Prices</h2>
+        <button id="refreshCrypto" class="text-sm px-3 py-1 rounded-lg bg-slate-100">Refresh</button>
       </div>
+      <div id="cryptoGrid" class="grid gap-4 sm:grid-cols-2"></div>
     </div>
-  </section>
 
-  <!-- Converter -->
-  <main id="converter" class="max-w-4xl mx-auto p-4 sm:p-6">
-    <div class="rounded-2xl border border-slate-200 bg-white shadow">
-      <div class="p-4 sm:p-6 border-b border-slate-200 flex items-center justify-between gap-2">
-        <h2 class="text-xl font-bold">Currency Converter</h2>
-        <button id="swapBtn" class="text-sm px-3 py-2 rounded-xl border border-slate-200 hover:bg-slate-50" aria-label="Swap currencies">Swap</button>
-      </div>
-      <div class="p-4 sm:p-6 grid sm:grid-cols-2 gap-4">
-        <label class="block">
-          <span class="text-sm text-slate-600">Amount</span>
-          <input id="amount" type="number" inputmode="decimal" step="0.01" value="100" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2" />
-        </label>
-        <div class="grid grid-cols-2 gap-3">
-          <label class="block">
-            <span class="text-sm text-slate-600">From</span>
-            <select id="from" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2"></select>
-          </label>
-          <label class="block">
-            <span class="text-sm text-slate-600">To</span>
-            <select id="to" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2"></select>
-          </label>
-        </div>
-        <div class="sm:col-span-2">
-          <button id="convertBtn" class="w-full sm:w-auto px-4 py-2 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700">Convert</button>
-        </div>
-        <div class="sm:col-span-2">
-          <output id="result" class="block text-lg font-semibold"></output>
-          <p id="rateInfo" class="text-sm text-slate-600"></p>
-        </div>
-        <div class="sm:col-span-2 text-sm text-slate-600">
-          <p class="mb-1">Quick links:</p>
-          <div class="flex flex-wrap gap-2">
-            <button data-quick="GBP|USD" class="quick-btn px-3 py-1 rounded-lg border hover:bg-slate-50">GBP → USD</button>
-            <button data-quick="USD|GBP" class="quick-btn px-3 py-1 rounded-lg border hover:bg-slate-50">USD → GBP</button>
-            <button data-quick="EUR|GBP" class="quick-btn px-3 py-1 rounded-lg border hover:bg-slate-50">EUR → GBP</button>
-            <button data-quick="GBP|EUR" class="quick-btn px-3 py-1 rounded-lg border hover:bg-slate-50">GBP → EUR</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <!-- Crypto mini-tracker -->
-  <section id="crypto" class="max-w-4xl mx-auto p-4 sm:p-6">
-    <div class="rounded-2xl border border-slate-200 bg-white shadow p-4 sm:p-6">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="text-xl font-bold">Crypto Prices Today</h2>
-        <button id="refreshCrypto" class="text-sm px-3 py-2 rounded-xl border border-slate-200 hover:bg-slate-50">Refresh</button>
-      </div>
-      <div id="cryptoGrid" class="grid sm:grid-cols-3 gap-4"></div>
-      <p class="text-xs text-slate-500 mt-3">Data: CoinGecko (free). Rates may be delayed. Always do your own research.</p>
-    </div>
-  </section>
-
-  <!-- SEO content blocks for long-tail queries -->
-  <section class="max-w-4xl mx-auto p-4 sm:p-6 grid gap-4">
-    <article class="rounded-2xl border border-slate-200 bg-white shadow p-4">
-      <h3 class="font-semibold text-lg">GBP to USD converter</h3>
-      <p class="text-slate-700">Use the currency converter above to instantly convert British Pounds (GBP) to US Dollars (USD) using live rates updated throughout the day.</p>
-    </article>
-    <article class="rounded-2xl border border-slate-200 bg-white shadow p-4">
-      <h3 class="font-semibold text-lg">BTC to GBP today</h3>
-      <p class="text-slate-700">The crypto mini‑tracker shows the latest Bitcoin (BTC) price in GBP and USD, alongside Ethereum (ETH) and PEPE.</p>
-    </article>
-    <article id="faq" class="rounded-2xl border border-slate-200 bg-white shadow p-4">
-      <h3 class="font-semibold text-lg">FAQ</h3>
-      <details class="mt-2">
-        <summary class="cursor-pointer font-medium">Where do the currency rates come from?</summary>
-        <p class="pl-4 pt-2 text-slate-700">Fiat FX rates are fetched from <code>exchangerate.host</code> (free, no API key). Crypto rates are fetched from CoinGecko.</p>
-      </details>
-      <details class="mt-2">
-        <summary class="cursor-pointer font-medium">Do you store personal data?</summary>
-        <p class="pl-4 pt-2 text-slate-700">No. This page runs in your browser. We don’t use cookies. Conversions are calculated client‑side.</p>
-      </details>
-      <details class="mt-2">
-        <summary class="cursor-pointer font-medium">How does this site make money?</summary>
-        <p class="pl-4 pt-2 text-slate-700">Through small ad placements and affiliate referrals to payment/crypto providers. Using those links supports the site at no extra cost to you.</p>
-      </details>
-    </article>
-  </section>
-
-  <footer class="max-w-4xl mx-auto p-6 text-center text-sm text-slate-600">
-    <p>&copy; <span id="year"></span> Simple GBP & Crypto Converter · <a class="underline" href="#">Privacy</a></p>
-    <p class="mt-1">FX by exchangerate.host · Crypto by CoinGecko</p>
-  </footer>
+    <footer class="text-center text-sm text-slate-500 mt-6">
+      © <span id="year"></span> Currency Converter
+    </footer>
+  </div>
 
   <script>
-    const fxEndpoint = 'https://api.exchangerate.host/latest';
+    const fxEndpoint = 'https://open.er-api.com/v6/latest'; // free FX API
     const cryptoEndpoint = 'https://api.coingecko.com/api/v3/simple/price';
 
     const amountEl = document.getElementById('amount');
@@ -174,25 +59,27 @@
     const yearEl = document.getElementById('year');
 
     const popularFiat = ['GBP','USD','EUR','JPY','CHF','AUD','CAD'];
-
     yearEl.textContent = new Date().getFullYear();
 
-    // Load saved preferences
     function loadPrefs() {
-      try {
-        const prefs = JSON.parse(localStorage.getItem('prefs') || '{}');
-        return prefs;
-      } catch { return {}; }
+      try { return JSON.parse(localStorage.getItem('prefs') || '{}'); }
+      catch { return {}; }
     }
     function savePrefs(prefs) {
       localStorage.setItem('prefs', JSON.stringify(prefs));
     }
 
+    // ---- FX fetching ----
     async function fetchFx(base='GBP') {
-      const url = `${fxEndpoint}?base=${encodeURIComponent(base)}`;
-      const res = await fetch(url, { headers: { 'accept': 'application/json' } });
+      const url = `${fxEndpoint}/${encodeURIComponent(base)}`;
+      const res = await fetch(url);
       if (!res.ok) throw new Error('FX fetch failed');
-      return res.json();
+      const data = await res.json();
+      if (data.result !== 'success') throw new Error('FX API error');
+      return { 
+        rates: data.rates, 
+        date: new Date(data.time_last_update_utc) 
+      };
     }
 
     async function initFx() {
@@ -203,12 +90,10 @@
         const codes = Object.keys(data.rates);
         const list = Array.from(new Set([...popularFiat, ...codes])).sort();
 
-        // Populate selects
         fromEl.innerHTML = list.map(c => `<option ${c===base? 'selected':''}>${c}</option>`).join('');
         const defaultTo = prefs.to || (base === 'GBP' ? 'USD' : 'GBP');
         toEl.innerHTML = list.map(c => `<option ${c===defaultTo? 'selected':''}>${c}</option>`).join('');
 
-        // Initial convert
         convert(data);
       } catch (err) {
         resultEl.textContent = 'Could not load FX rates. Try again later.';
@@ -235,8 +120,7 @@
         if (!rate) { resultEl.textContent = 'Unsupported pair'; return; }
         const out = amt * rate;
         resultEl.textContent = `${formatMoney(amt, base)} = ${formatMoney(out, target)}`;
-        const ts = new Date(data.date);
-        rateInfoEl.textContent = `Rate: 1 ${base} = ${rate.toFixed(6)} ${target} · ${ts.toDateString()}`;
+        rateInfoEl.textContent = `Rate: 1 ${base} = ${rate.toFixed(6)} ${target} · ${data.date.toDateString()}`;
         savePrefs({ base, to: target });
       };
 
@@ -254,7 +138,6 @@
     });
     convertBtn.addEventListener('click', () => convert());
 
-    // Quick links
     document.querySelectorAll('.quick-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const [a,b] = btn.dataset.quick.split('|');
@@ -262,7 +145,7 @@
       });
     });
 
-    // Crypto section
+    // ---- Crypto section ----
     const cryptoGrid = document.getElementById('cryptoGrid');
     const refreshCrypto = document.getElementById('refreshCrypto');
 
@@ -270,7 +153,7 @@
       const ids = ['bitcoin','ethereum','pepe'];
       const vs = ['gbp','usd','eur'];
       const url = `${cryptoEndpoint}?ids=${ids.join(',')}&vs_currencies=${vs.join(',')}&include_24hr_change=true`;
-      const res = await fetch(url, { headers: { 'accept': 'application/json' } });
+      const res = await fetch(url);
       if (!res.ok) throw new Error('Crypto fetch failed');
       return res.json();
     }
